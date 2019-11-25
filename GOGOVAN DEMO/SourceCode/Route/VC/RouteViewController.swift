@@ -13,10 +13,11 @@ import RxCocoa
 
 class RouteViewController: UIViewController {
     
+    let headerHeight: CGFloat = 100
+    let estimatedHeight: CGFloat = 44
+    
     var headerView: RouteHeaderView!
-    var historyTableView: UITableView!
-    var recommandTableView: UITableView!
-    var headerHeight: CGFloat = 100
+    var resultTableView: UITableView!
     var googleSearchViewModal = GoogleSearchViewModal()
 
     override func viewDidLoad() {
@@ -25,38 +26,46 @@ class RouteViewController: UIViewController {
     }
     
     func setupUI() {
-        historyTableView = UITableView()
-        historyTableView.rx
+        resultTableView = UITableView()
+        resultTableView.tableFooterView = UIView()
+        resultTableView.rx
             .setDelegate(self)
             .disposed(by: googleSearchViewModal.disposeBag)
         
-        self.view.addSubview(historyTableView)
-        historyTableView.snp.makeConstraints { (make) in
+        Observable
+            .combineLatest(googleSearchViewModal.searchResultList,resultTableView.rx.itemSelected)
+            .subscribe(onNext: { (results,index) in
+                
+            }, onError: { (error) in
+                
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
+        Observable
+            .combineLatest(googleSearchViewModal.searchResultList,googleSearchViewModal.recentSearchResultList,googleSearchViewModal.pickupBeginEdit)
+            .map({ (list:[geometricResult], recentList:[geometricResult] , isEditing: Bool) -> Array<(geometricResult, Bool)> in
+                var arr = Array<(geometricResult, Bool)>()
+                for result in list{
+                    arr.append((result,isEditing))
+                }
+                
+                for result in recentList{
+                    arr.append((result,isEditing))
+                }
+                return arr
+            })
+            .bind(to: self.resultTableView.rx.items) { (tableView, row, element) in
+                let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
+                cell.textLabel?.text = element.0.name
+                cell.detailTextLabel?.text = element.0.formatted_address
+                cell.detailTextLabel?.textColor = .gray
+                cell.selectionStyle = .none
+                return cell
+            }.disposed(by: googleSearchViewModal.disposeBag)
+        
+        self.view.addSubview(resultTableView)
+        resultTableView.snp.makeConstraints { (make) in
             make.top.bottom.left.right.equalTo(self.view)
         }
-//        self.view.addSubview(headerView)
-//        headerView.snp.makeConstraints { (make) in
-//            make.top.bottom.right.left.equalTo(self.view)
-//        }
-        
-    }
-    
-    func searchPlaceFromGoogle(place:String) {
-        
-        var strGoogleApi = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(place)&key=\(publicConstant.googleAPIKey)"
-        strGoogleApi = strGoogleApi.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
-        
-        var urlRequest = URLRequest(url: URL(string: strGoogleApi)!)
-        urlRequest.httpMethod = "GET"
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, resopnse, error) in
-            if error == nil {
-                let jsonDict = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print("json == \(jsonDict)")
-            } else {
-                //we have error connection google api
-            }
-        }
-        task.resume()
     }
 
 }
@@ -67,7 +76,7 @@ extension RouteViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 44
+        return estimatedHeight
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -78,7 +87,25 @@ extension RouteViewController: UITableViewDelegate{
         
         headerView.pickUpTextField.rx.text
             .orEmpty
-            .bind(to: googleSearchViewModal.searchKeyword)
+            .skip(1)
+            .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
+            .distinctUntilChanged()
+//            .filter{ $0.count != 0 }
+            .bind(to: googleSearchViewModal.pickupSearchKeyword)
+            .disposed(by: googleSearchViewModal.disposeBag)
+        
+        headerView.pickUpTextField.rx.controlEvent([.editingDidBegin])
+            .asObservable()
+            .subscribe(onNext: { _ in
+                self.googleSearchViewModal.pickupBeginEdit.onNext(true)
+            })
+            .disposed(by: googleSearchViewModal.disposeBag)
+        
+        headerView.pickUpTextField.rx.controlEvent([.editingChanged,.editingDidEnd])
+            .asObservable()
+            .subscribe(onNext: { _ in
+                self.googleSearchViewModal.pickupBeginEdit.onNext(false)
+            })
             .disposed(by: googleSearchViewModal.disposeBag)
         
         return headerView

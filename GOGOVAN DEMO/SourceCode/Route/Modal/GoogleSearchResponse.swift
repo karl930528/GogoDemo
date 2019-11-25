@@ -24,8 +24,8 @@ struct Geometry: Codable {
 }
 
 struct Location: Codable {
-    var lat : String?
-    var lng : String?
+    var lat : Double?
+    var lng : Double?
 }
 
 struct Viewport: Codable {

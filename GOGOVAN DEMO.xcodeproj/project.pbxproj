@@ -18,6 +18,7 @@
 		529C39AA238A81460013C3E0 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39A9238A81460013C3E0 /* WebServices.swift */; };
 		529C39AC238A82D70013C3E0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AB238A82D70013C3E0 /* Extension.swift */; };
 		529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AD238A83570013C3E0 /* LoadingIndicator.swift */; };
+		529C39B0238C39560013C3E0 /* AppUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AF238C39560013C3E0 /* AppUserDefault.swift */; };
 		52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B38E23881ACF0053D3AD /* AppDelegate.swift */; };
 		52B2B39623881AD00053D3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39523881AD00053D3AD /* Assets.xcassets */; };
 		52B2B39923881AD00053D3AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39723881AD00053D3AD /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		529C39A9238A81460013C3E0 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		529C39AB238A82D70013C3E0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		529C39AD238A83570013C3E0 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		529C39AF238C39560013C3E0 /* AppUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefault.swift; sourceTree = "<group>"; };
 		52B2B38B23881ACF0053D3AD /* GOGOVAN DEMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GOGOVAN DEMO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B38E23881ACF0053D3AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52B2B39523881AD00053D3AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				529C39A6238A47020013C3E0 /* Global.swift */,
 				529C39AB238A82D70013C3E0 /* Extension.swift */,
 				529C39AD238A83570013C3E0 /* LoadingIndicator.swift */,
+				529C39AF238C39560013C3E0 /* AppUserDefault.swift */,
 			);
 			path = Utiliy;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				F80713F3238BD7D000AFBAD9 /* GoogleSearchViewModal.swift in Sources */,
 				529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */,
 				529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */,
+				529C39B0238C39560013C3E0 /* AppUserDefault.swift in Sources */,
 				529C399D238980570013C3E0 /* RouteViewController.swift in Sources */,
 				529C3990238821030013C3E0 /* MapViewController.swift in Sources */,
 				529C39AA238A81460013C3E0 /* WebServices.swift in Sources */,

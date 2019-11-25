@@ -20,13 +20,13 @@ public struct MappableRequest<Model: Codable> {
     var header: [String: String]?
     var requestOptions: RequestOption = []
     
-    init(method: HTTPMethod = .get, releativeURL: String, param: [String:Any], encoding: ParameterEncoding = JSONEncoding.default, header: [String:String]? = nil) {
-        let urlString = "https://itunes.apple.com".appending(releativeURL).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+    init(method: HTTPMethod = .get, releativeURL: String, param: [String:Any]? = nil, encoding: ParameterEncoding = JSONEncoding.default, header: [String:String]? = nil) {
+        let urlString = releativeURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let url = URL(string: urlString ?? "")!
         self.init(method: method, absoluteURL: url, param: param, encoding: encoding, header: header)
     }
     
-    init(method: HTTPMethod, absoluteURL: URL, param: [String:Any], encoding: ParameterEncoding, header: [String:String]? = nil) {
+    init(method: HTTPMethod, absoluteURL: URL, param: [String:Any]? = nil, encoding: ParameterEncoding, header: [String:String]? = nil) {
         self.method = method
         self.url = absoluteURL
         self.param = param

@@ -66,3 +66,16 @@ extension UIViewController {
         }
     }
 }
+
+extension AppUserDefaults {
+    
+    var recentPickupSearch: [geometricResult] {
+        get { return userDefaults.value(forKey: UserDefaultKey.recentPickupSearch) as? [geometricResult] ?? [] }
+        set { userDefaults.set(newValue, forKey: UserDefaultKey.recentPickupSearch) }
+    }
+    
+    var recentDropoffSearch: [geometricResult] {
+        get { return userDefaults.value(forKey: UserDefaultKey.recentDropoffSearch) as? [geometricResult] ?? [] }
+        set { userDefaults.set(newValue, forKey: UserDefaultKey.recentDropoffSearch) }
+    }
+}
