@@ -1,0 +1,601 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0C26FD894E6324CE189D2389 /* Pods_GOGOVAN_DEMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52933D2F0F665C834B4483D /* Pods_GOGOVAN_DEMO.framework */; };
+		529C3990238821030013C3E0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C398F238821030013C3E0 /* MapViewController.swift */; };
+		529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C3993238829F40013C3E0 /* AbstractViewController.swift */; };
+		529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39972389775C0013C3E0 /* MapBaseViewController.swift */; };
+		529C399D238980570013C3E0 /* RouteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C399C238980570013C3E0 /* RouteViewController.swift */; };
+		529C39A2238997C00013C3E0 /* RouteHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39A1238997C00013C3E0 /* RouteHeaderView.swift */; };
+		529C39A42389A95D0013C3E0 /* RouteHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 529C39A32389A95D0013C3E0 /* RouteHeaderView.xib */; };
+		529C39A7238A47020013C3E0 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39A6238A47020013C3E0 /* Global.swift */; };
+		529C39AA238A81460013C3E0 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39A9238A81460013C3E0 /* WebServices.swift */; };
+		529C39AC238A82D70013C3E0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AB238A82D70013C3E0 /* Extension.swift */; };
+		529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AD238A83570013C3E0 /* LoadingIndicator.swift */; };
+		52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B38E23881ACF0053D3AD /* AppDelegate.swift */; };
+		52B2B39623881AD00053D3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39523881AD00053D3AD /* Assets.xcassets */; };
+		52B2B39923881AD00053D3AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39723881AD00053D3AD /* LaunchScreen.storyboard */; };
+		F80713EF238BBF4600AFBAD9 /* GoogleSearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80713EE238BBF4600AFBAD9 /* GoogleSearchResponse.swift */; };
+		F80713F3238BD7D000AFBAD9 /* GoogleSearchViewModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = F80713F2238BD7D000AFBAD9 /* GoogleSearchViewModal.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		528EF3C688AC85EBFB3ADF84 /* Pods-GOGOVAN DEMO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOGOVAN DEMO.release.xcconfig"; path = "Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO.release.xcconfig"; sourceTree = "<group>"; };
+		529C398F238821030013C3E0 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		529C3993238829F40013C3E0 /* AbstractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
+		529C39972389775C0013C3E0 /* MapBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBaseViewController.swift; sourceTree = "<group>"; };
+		529C399C238980570013C3E0 /* RouteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteViewController.swift; sourceTree = "<group>"; };
+		529C39A1238997C00013C3E0 /* RouteHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteHeaderView.swift; sourceTree = "<group>"; };
+		529C39A32389A95D0013C3E0 /* RouteHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RouteHeaderView.xib; sourceTree = "<group>"; };
+		529C39A6238A47020013C3E0 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		529C39A9238A81460013C3E0 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
+		529C39AB238A82D70013C3E0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		529C39AD238A83570013C3E0 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		52B2B38B23881ACF0053D3AD /* GOGOVAN DEMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GOGOVAN DEMO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		52B2B38E23881ACF0053D3AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		52B2B39523881AD00053D3AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		52B2B39823881AD00053D3AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		52B2B39A23881AD00053D3AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		89A22B7299E598AE23A62830 /* Pods-GOGOVAN DEMO.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOGOVAN DEMO.debug.xcconfig"; path = "Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO.debug.xcconfig"; sourceTree = "<group>"; };
+		A52933D2F0F665C834B4483D /* Pods_GOGOVAN_DEMO.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GOGOVAN_DEMO.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F80713EE238BBF4600AFBAD9 /* GoogleSearchResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchResponse.swift; sourceTree = "<group>"; };
+		F80713F2238BD7D000AFBAD9 /* GoogleSearchViewModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSearchViewModal.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		52B2B38823881ACF0053D3AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0C26FD894E6324CE189D2389 /* Pods_GOGOVAN_DEMO.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		14867A5F33A1F88E74504732 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				89A22B7299E598AE23A62830 /* Pods-GOGOVAN DEMO.debug.xcconfig */,
+				528EF3C688AC85EBFB3ADF84 /* Pods-GOGOVAN DEMO.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		529C398323881E190013C3E0 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				52B2B39523881AD00053D3AD /* Assets.xcassets */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		529C398423881E2E0013C3E0 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				529C398623881EE20013C3E0 /* VC */,
+				529C398823881F150013C3E0 /* Modal */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		529C398523881E520013C3E0 /* Route */ = {
+			isa = PBXGroup;
+			children = (
+				F80713F1238BD74A00AFBAD9 /* ViewModal */,
+				F80713F0238BD44E00AFBAD9 /* View */,
+				529C399B2389804A0013C3E0 /* VC */,
+				529C39A02389959B0013C3E0 /* Modal */,
+			);
+			path = Route;
+			sourceTree = "<group>";
+		};
+		529C398623881EE20013C3E0 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				529C398F238821030013C3E0 /* MapViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		529C398823881F150013C3E0 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		529C398C23881FED0013C3E0 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				529C3993238829F40013C3E0 /* AbstractViewController.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		529C399923897F8A0013C3E0 /* MapBase */ = {
+			isa = PBXGroup;
+			children = (
+				529C399A23897F960013C3E0 /* VC */,
+			);
+			path = MapBase;
+			sourceTree = "<group>";
+		};
+		529C399A23897F960013C3E0 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				529C39972389775C0013C3E0 /* MapBaseViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		529C399B2389804A0013C3E0 /* VC */ = {
+			isa = PBXGroup;
+			children = (
+				529C399C238980570013C3E0 /* RouteViewController.swift */,
+			);
+			path = VC;
+			sourceTree = "<group>";
+		};
+		529C39A02389959B0013C3E0 /* Modal */ = {
+			isa = PBXGroup;
+			children = (
+				F80713EE238BBF4600AFBAD9 /* GoogleSearchResponse.swift */,
+			);
+			path = Modal;
+			sourceTree = "<group>";
+		};
+		529C39A5238A46C50013C3E0 /* Utiliy */ = {
+			isa = PBXGroup;
+			children = (
+				529C39A6238A47020013C3E0 /* Global.swift */,
+				529C39AB238A82D70013C3E0 /* Extension.swift */,
+				529C39AD238A83570013C3E0 /* LoadingIndicator.swift */,
+			);
+			path = Utiliy;
+			sourceTree = "<group>";
+		};
+		529C39A8238A81340013C3E0 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				529C39A9238A81460013C3E0 /* WebServices.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		52B2B38223881ACF0053D3AD = {
+			isa = PBXGroup;
+			children = (
+				52B2B38D23881ACF0053D3AD /* GOGOVAN DEMO */,
+				52B2B38C23881ACF0053D3AD /* Products */,
+				14867A5F33A1F88E74504732 /* Pods */,
+				DC5E5ED35FFF0570A169D754 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		52B2B38C23881ACF0053D3AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				52B2B38B23881ACF0053D3AD /* GOGOVAN DEMO.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		52B2B38D23881ACF0053D3AD /* GOGOVAN DEMO */ = {
+			isa = PBXGroup;
+			children = (
+				529C39A8238A81340013C3E0 /* API */,
+				529C39A5238A46C50013C3E0 /* Utiliy */,
+				529C398C23881FED0013C3E0 /* Common */,
+				529C398323881E190013C3E0 /* Image */,
+				52B2B3A223881C810053D3AD /* Storyboard */,
+				52B2B3A123881C730053D3AD /* Settinng */,
+				52B2B3A023881B630053D3AD /* SourceCode */,
+				52B2B39A23881AD00053D3AD /* Info.plist */,
+			);
+			path = "GOGOVAN DEMO";
+			sourceTree = "<group>";
+		};
+		52B2B3A023881B630053D3AD /* SourceCode */ = {
+			isa = PBXGroup;
+			children = (
+				529C399923897F8A0013C3E0 /* MapBase */,
+				529C398523881E520013C3E0 /* Route */,
+				529C398423881E2E0013C3E0 /* Map */,
+			);
+			path = SourceCode;
+			sourceTree = "<group>";
+		};
+		52B2B3A123881C730053D3AD /* Settinng */ = {
+			isa = PBXGroup;
+			children = (
+				52B2B38E23881ACF0053D3AD /* AppDelegate.swift */,
+			);
+			path = Settinng;
+			sourceTree = "<group>";
+		};
+		52B2B3A223881C810053D3AD /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				52B2B39723881AD00053D3AD /* LaunchScreen.storyboard */,
+			);
+			path = Storyboard;
+			sourceTree = "<group>";
+		};
+		DC5E5ED35FFF0570A169D754 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A52933D2F0F665C834B4483D /* Pods_GOGOVAN_DEMO.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F80713F0238BD44E00AFBAD9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				529C39A1238997C00013C3E0 /* RouteHeaderView.swift */,
+				529C39A32389A95D0013C3E0 /* RouteHeaderView.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F80713F1238BD74A00AFBAD9 /* ViewModal */ = {
+			isa = PBXGroup;
+			children = (
+				F80713F2238BD7D000AFBAD9 /* GoogleSearchViewModal.swift */,
+			);
+			path = ViewModal;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		52B2B38A23881ACF0053D3AD /* GOGOVAN DEMO */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 52B2B39D23881AD00053D3AD /* Build configuration list for PBXNativeTarget "GOGOVAN DEMO" */;
+			buildPhases = (
+				8A2994D16254290846E48A38 /* [CP] Check Pods Manifest.lock */,
+				52B2B38723881ACF0053D3AD /* Sources */,
+				52B2B38823881ACF0053D3AD /* Frameworks */,
+				52B2B38923881ACF0053D3AD /* Resources */,
+				DEFED2C9D2A40BA92798E1E8 /* [CP] Copy Pods Resources */,
+				21621D13C7E73DE7D917C5FD /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "GOGOVAN DEMO";
+			productName = "GOGOVAN DEMO";
+			productReference = 52B2B38B23881ACF0053D3AD /* GOGOVAN DEMO.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		52B2B38323881ACF0053D3AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = Chuen;
+				TargetAttributes = {
+					52B2B38A23881ACF0053D3AD = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 52B2B38623881ACF0053D3AD /* Build configuration list for PBXProject "GOGOVAN DEMO" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 52B2B38223881ACF0053D3AD;
+			productRefGroup = 52B2B38C23881ACF0053D3AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				52B2B38A23881ACF0053D3AD /* GOGOVAN DEMO */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		52B2B38923881ACF0053D3AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				52B2B39923881AD00053D3AD /* LaunchScreen.storyboard in Resources */,
+				529C39A42389A95D0013C3E0 /* RouteHeaderView.xib in Resources */,
+				52B2B39623881AD00053D3AD /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		21621D13C7E73DE7D917C5FD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8A2994D16254290846E48A38 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-GOGOVAN DEMO-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEFED2C9D2A40BA92798E1E8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		52B2B38723881ACF0053D3AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				529C39AC238A82D70013C3E0 /* Extension.swift in Sources */,
+				F80713EF238BBF4600AFBAD9 /* GoogleSearchResponse.swift in Sources */,
+				52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */,
+				529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */,
+				529C39A7238A47020013C3E0 /* Global.swift in Sources */,
+				F80713F3238BD7D000AFBAD9 /* GoogleSearchViewModal.swift in Sources */,
+				529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */,
+				529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */,
+				529C399D238980570013C3E0 /* RouteViewController.swift in Sources */,
+				529C3990238821030013C3E0 /* MapViewController.swift in Sources */,
+				529C39AA238A81460013C3E0 /* WebServices.swift in Sources */,
+				529C39A2238997C00013C3E0 /* RouteHeaderView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		52B2B39723881AD00053D3AD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				52B2B39823881AD00053D3AD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		52B2B39B23881AD00053D3AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		52B2B39C23881AD00053D3AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		52B2B39E23881AD00053D3AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 89A22B7299E598AE23A62830 /* Pods-GOGOVAN DEMO.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B98SBCL5R4;
+				INFOPLIST_FILE = "GOGOVAN DEMO/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		52B2B39F23881AD00053D3AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 528EF3C688AC85EBFB3ADF84 /* Pods-GOGOVAN DEMO.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = B98SBCL5R4;
+				INFOPLIST_FILE = "GOGOVAN DEMO/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		52B2B38623881ACF0053D3AD /* Build configuration list for PBXProject "GOGOVAN DEMO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B2B39B23881AD00053D3AD /* Debug */,
+				52B2B39C23881AD00053D3AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		52B2B39D23881AD00053D3AD /* Build configuration list for PBXNativeTarget "GOGOVAN DEMO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				52B2B39E23881AD00053D3AD /* Debug */,
+				52B2B39F23881AD00053D3AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 52B2B38323881ACF0053D3AD /* Project object */;
+}
