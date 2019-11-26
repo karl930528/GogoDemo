@@ -14,7 +14,7 @@ class GoogleSearchViewModal {
     let recentSearchResultList = PublishSubject<[GeometricResult]>()
     let pickupSearchKeyword = PublishSubject<String>()
     let dropoffSearchKeyword = PublishSubject<String>()
-    let pickupBeginEdit = PublishSubject<Bool>()
+//    let pickupBeginEdit = PublishSubject<Bool>()
     let disposeBag = DisposeBag()
     
     init() {
@@ -36,22 +36,20 @@ class GoogleSearchViewModal {
                 
             }).disposed(by: disposeBag)
         
-        pickupBeginEdit
-            .asObservable()
-            .subscribe(onNext: { (beginEdit) in
-                beginEdit ?
-                    self.recentSearchResultList.onNext(appUserDefaults.recentPickupSearch) :
-                    self.recentSearchResultList.onNext([])
-            }, onError: { (error) in
-                
-            }).disposed(by: disposeBag)
+//        pickupBeginEdit
+//            .asObservable()
+//            .subscribe(onNext: { (beginEdit) in
+//                beginEdit ?
+//                    self.recentSearchResultList.onNext(appUserDefaults.recentPickupSearch) :
+//                    self.recentSearchResultList.onNext([])
+//            }, onError: { (error) in
+//
+//            }).disposed(by: disposeBag)
         
     }
     
     func updatePickupRecentSearch(result:GeometricResult){
-        var tempList:[GeometricResult] = []
-        
-        tempList = appUserDefaults.recentPickupSearch
+        var tempList:[GeometricResult] = appUserDefaults.recentPickupSearch
         if tempList.count > 0 && tempList.count < 5{
             tempList.insert(result, at: 0)
         }else if tempList.count >= 5{

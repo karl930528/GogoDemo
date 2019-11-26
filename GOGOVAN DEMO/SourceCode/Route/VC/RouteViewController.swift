@@ -23,22 +23,19 @@ class RouteViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        setupResultTableView()
+        setupHistoryTableView()
         setupTableHeader()
     }
     
-    func setupUI() {
+    func setupResultTableView() {
+        headerView = RouteHeaderView.getRouteHeader()
         resultTableView = UITableView()
         resultTableView.tableFooterView = UIView()
         self.view.addSubview(resultTableView)
         resultTableView.snp.makeConstraints { (make) in
             make.top.bottom.left.right.equalTo(self.view)
         }
-        
-        historyTableView = UITableView()
-        historyTableView.tableFooterView = UIView()
-        historyTableView.frame = resultTableView.frame
-        self.view.addSubview(historyTableView)
         
         resultTableView.rx
             .setDelegate(self)
@@ -80,18 +77,39 @@ class RouteViewController: UIViewController {
                 return cell
         }
         .disposed(by: googleSearchViewModal.disposeBag)
+    }
+    
+    func setupHistoryTableView() {
+        historyTableView = UITableView()
+        historyTableView.tableFooterView = UIView()
+        self.view.addSubview(historyTableView)
+        historyTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(resultTableView.snp.top).offset(headerHeight)
+            make.bottom.left.right.equalTo(self.view)
+        }
+        
+        let pickupBeginEditObservable = headerView.pickUpTextField.rx.controlEvent([.editingDidBegin])
+        let dropoffBeginEditObservable = headerView.dropOffTextField.rx.controlEvent([.editingDidBegin]) 
+        
+        Observable
+            .of(pickupBeginEditObservable,dropoffBeginEditObservable)
+            .merge()
+            .map { (_) -> Bool in
+                return false}
+            .bind(to: historyTableView.rx.isHidden)
+            .disposed(by: googleSearchViewModal.disposeBag)
         
     }
     
     func setupTableHeader() {
         
-        let pickupTextFieldTextObservable = headerView.pickUpTextField.rx.text.orEmpty.changed
-        let dropoffTextFieldTextObservable = headerView.dropOffTextField.rx.text.orEmpty.changed
+        let pickupTextFieldTextObservable = headerView.pickUpTextField.rx.text.orEmpty.changed.filter{$0.count != 0}
+        let dropoffTextFieldTextObservable = headerView.dropOffTextField.rx.text.orEmpty.changed.filter{$0.count != 0}
         let pickupEditObservable = headerView.pickUpTextField.rx.controlEvent([.editingChanged])
-        let dropoffEditObservable = headerView.pickUpTextField.rx.controlEvent([.editingChanged])
+        let dropoffEditObservable = headerView.dropOffTextField.rx.controlEvent([.editingChanged])
+        
         Observable
             .zip(pickupTextFieldTextObservable, pickupEditObservable)
-            .asObservable()
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .map { (key) -> String in
                 return key.0}
@@ -100,20 +118,28 @@ class RouteViewController: UIViewController {
         
         Observable
             .zip(dropoffTextFieldTextObservable, dropoffEditObservable)
-            .asObservable()
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
             .map { (key) -> String in
                 return key.0}
             .bind(to: googleSearchViewModal.dropoffSearchKeyword)
             .disposed(by: googleSearchViewModal.disposeBag)
         
-        headerView.pickUpTextField.rx
-            .controlEvent([.editingChanged,.editingDidEnd])
-            .asObservable()
-            .subscribe(onNext: { _ in
-                self.googleSearchViewModal.pickupBeginEdit.onNext(false)
-            })
+        Observable
+            .of(pickupEditObservable,dropoffEditObservable)
+            .merge()
+            .map { (_) -> Bool in
+                return true}
+            .bind(to: historyTableView.rx.isHidden)
             .disposed(by: googleSearchViewModal.disposeBag)
+        
+
+//        headerView.pickUpTextField.rx
+//            .controlEvent([.editingChanged,.editingDidEnd])
+//            .asObservable()
+//            .subscribe(onNext: { _ in
+//                self.googleSearchViewModal.pickupBeginEdit.onNext(false)
+//            })
+//            .disposed(by: googleSearchViewModal.disposeBag)
     }
     
 }
@@ -128,13 +154,12 @@ extension RouteViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        headerView = RouteHeaderView.getRouteHeader()
         let border = UIView(frame: CGRect(x:0, y: headerHeight - 1 , width:self.view.bounds.width, height:1))
         border.backgroundColor = .lightGray
         headerView.addSubview(border)
-        
         return headerView
     }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return headerHeight
     }
