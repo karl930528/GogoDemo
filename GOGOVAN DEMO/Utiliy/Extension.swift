@@ -69,13 +69,30 @@ extension UIViewController {
 
 extension AppUserDefaults {
     
-    var recentPickupSearch: [geometricResult] {
-        get { return userDefaults.value(forKey: UserDefaultKey.recentPickupSearch) as? [geometricResult] ?? [] }
-        set { userDefaults.set(newValue, forKey: UserDefaultKey.recentPickupSearch) }
+    var recentPickupSearch: [GeometricResult] {
+        get {
+//            return userDefaults.value(forKey: UserDefaultKey.recentPickupSearch) as? [geometricResult] ?? []
+            let data = userDefaults.object(forKey: UserDefaultKey.recentPickupSearch) as? Data
+            guard let d = data else { return [] }
+            return NSKeyedUnarchiver.unarchiveObject(with: d) as! [GeometricResult]
+        }
+        
+        set {
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            userDefaults.set(data, forKey: UserDefaultKey.recentPickupSearch)
+        }
     }
     
-    var recentDropoffSearch: [geometricResult] {
-        get { return userDefaults.value(forKey: UserDefaultKey.recentDropoffSearch) as? [geometricResult] ?? [] }
-        set { userDefaults.set(newValue, forKey: UserDefaultKey.recentDropoffSearch) }
+    var recentDropoffSearch: [GeometricResult] {
+        get {
+//            return userDefaults.value(forKey: UserDefaultKey.recentDropoffSearch) as? [geometricResult] ?? []
+            let data = userDefaults.object(forKey: UserDefaultKey.recentDropoffSearch) as? Data
+            guard let d = data else { return [] }
+            return NSKeyedUnarchiver.unarchiveObject(with: d) as! [GeometricResult]
+        }
+        set {
+            let data = NSKeyedArchiver.archivedData(withRootObject: newValue)
+            userDefaults.set(data, forKey: UserDefaultKey.recentDropoffSearch)
+        }
     }
 }

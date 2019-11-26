@@ -14,6 +14,15 @@ class Global:  NSObject {
 
 struct publicConstant {
     static let googleAPIKey = "AIzaSyCUyh_IxARPpIQfkCuk7udVXCwXGG9hAv8"
+    static let kformattedAddress = "kformattedAddress"
+    static let kGeometry = "kGeometry"
+    static let kName = "kName"
+    static let kLocation = "kLocation"
+    static let kViewport = "KViewport"
+    static let kLat = "kLat"
+    static let Klng = "kLng"
+    static let KNortheast = "KNortheast"
+    static let KSouthwest = "KSouthwest"
 }
 
 func isIphoneXSerial() -> Bool {
