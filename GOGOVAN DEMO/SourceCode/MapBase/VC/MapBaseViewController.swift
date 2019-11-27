@@ -28,14 +28,20 @@ class MapBaseViewController: AbstractViewController {
     }
     
     func setupNavBarBtn() {
-        let menu_btn = UIBarButtonItem(image: UIImage(named: "menu_btn"), style: .plain, target: self, action: #selector(ggg))
+        let menu_btn = UIBarButtonItem(image: UIImage(named: "menu_btn"),
+                                       style: .plain,
+                                       target: self,
+                                       action: #selector(ggg))
         menu_btn.tintColor = .black
         self.navigationItem.leftBarButtonItem  = menu_btn
     }
     
     @objc func ggg() {
         var frame = self.mapContainer.frame
-        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: 0)
+        frame = CGRect(x: frame.minX,
+                       y: frame.minY,
+                       width: frame.width,
+                       height: 0)
         UIView.animate(withDuration: 0.3) {
             self.mapContainer.frame = frame
             self.view.layoutIfNeeded()
@@ -48,7 +54,10 @@ class MapBaseViewController: AbstractViewController {
     }
     
     func setMapView() {
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: mapContainerHeight)
+        let frame = CGRect(x: 0,
+                           y: 0,
+                           width: self.view.frame.size.width,
+                           height: mapContainerHeight)
         mapContainer = UIView(frame: frame)
         self.view.addSubview(mapContainer)
         

@@ -23,7 +23,10 @@ class MapViewController: AbstractViewController {
     }
     
     func setupGoogleMap() {
-        let camera = GMSCameraPosition.camera(withLatitude: 22.312108, longitude: 114.221616, zoom: zoomScale)
+        let camera = GMSCameraPosition.camera(withLatitude: 22.312108,
+                                              longitude: 114.221616,
+                                              zoom: zoomScale)
+        
         vMap = GMSMapView.map(withFrame: .zero, camera: camera)
         vMap.delegate = self
         

@@ -41,31 +41,26 @@ class RouteViewController: UIViewController {
             .setDelegate(self)
             .disposed(by: googleSearchViewModal.disposeBag)
         
-        Observable
-            .zip(googleSearchViewModal.searchResultList,
-                 resultTableView.rx.itemSelected)
-            .subscribe(onNext: { (results,index) in
-                if results.count  > 0 {
-                    if self.headerView.pickUpTextField.isEditing{
-                        self.googleSearchViewModal.updatePickupRecentSearch(result: results[index.row])
-//                        self.googleSearchViewModal.pickupSearchKeyword.onNext(results[index.row].name ?? "")
-//                        self.headerView.pickUpTextField.text = results[index.row].name
-                    }else{
-                        self.googleSearchViewModal.updateDropoffRecentSearch(result: results[index.row])
-//                        self.googleSearchViewModal.dropoffSearchKeyword.onNext(results[index.row].name ?? "")
-//                        self.headerView.dropOffTextField.text = results[index.row].name
-                    }
+        resultTableView.rx.itemSelected
+            .subscribe(onNext: { (index) in
+                if self.headerView.pickUpTextField.isEditing{
+                    guard let result = try? self.googleSearchViewModal.searchResultList.value()[index.row] else { return }
+                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .pickup)
+                    self.googleSearchViewModal.replaceText(textField: self.headerView.pickUpTextField,
+                                                           index: index.row,
+                                                           type: .searchResult)
+                }else{
+                    guard let result = try? self.googleSearchViewModal.searchResultList.value()[index.row] else { return }
+                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .dropoff)
+                    self.googleSearchViewModal.replaceText(textField: self.headerView.dropOffTextField,
+                                                           index: index.row,
+                                                           type: .searchResult)
                 }
             }).disposed(by: googleSearchViewModal.disposeBag)
         
         googleSearchViewModal.searchResultList
             .bind(to: self.resultTableView.rx.items) { (tableView, row, element) in
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
-                cell.textLabel?.text = element.name
-                cell.detailTextLabel?.text = element.formatted_address
-                cell.detailTextLabel?.textColor = .gray
-                cell.selectionStyle = .none
-                return cell
+                return self.setupTableCell(result: element, type: .searchResult)
         }
         .disposed(by: googleSearchViewModal.disposeBag)
     }
@@ -88,16 +83,26 @@ class RouteViewController: UIViewController {
         let pickupEndEditObservable = headerView.pickUpTextField.rx.controlEvent([.editingDidEnd])
         let dropoffEndEditObservable = headerView.dropOffTextField.rx.controlEvent([.editingDidEnd])
         
-
+        historyTableView.rx.itemSelected
+            .subscribe(onNext: { (index) in
+                if self.headerView.pickUpTextField.isEditing{
+                    guard let result = try? self.googleSearchViewModal.recentSearchResultList.value()[index.row] else { return }
+                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .pickup)
+                    self.googleSearchViewModal.replaceText(textField: self.headerView.pickUpTextField,
+                                                           index: index.row,
+                                                           type: .historyResults)
+                }else{
+                    guard let result = try? self.googleSearchViewModal.recentSearchResultList.value()[index.row] else { return }
+                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .dropoff)
+                    self.googleSearchViewModal.replaceText(textField: self.headerView.dropOffTextField,
+                                                           index: index.row,
+                                                           type: .historyResults)
+                }
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
         googleSearchViewModal.recentSearchResultList
             .bind(to: self.historyTableView.rx.items) { (tableView, row, element) in
-                let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
-                cell.textLabel?.text = element.name
-                cell.detailTextLabel?.text = element.formatted_address
-                cell.detailTextLabel?.textColor = .gray
-                cell.selectionStyle = .none
-                cell.imageView?.image = UIImage(named: "history_icon")
-                return cell
+                return self.setupTableCell(result: element, type: .historyResults)
         }
         .disposed(by: googleSearchViewModal.disposeBag)
         
@@ -169,6 +174,21 @@ class RouteViewController: UIViewController {
             .disposed(by: googleSearchViewModal.disposeBag)
     }
     
+    func setupTableCell(result:GeometricResult, type:ResultType) -> UITableViewCell {
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
+        cell.textLabel?.text = result.name
+        cell.detailTextLabel?.text = result.formatted_address
+        cell.detailTextLabel?.textColor = .gray
+        cell.selectionStyle = .none
+        switch type {
+        case .historyResults:
+            cell.imageView?.image = UIImage(named: "history_icon")
+            break
+        default:
+            break
+        }
+        return cell
+    }
 }
 
 extension RouteViewController: UITableViewDelegate{

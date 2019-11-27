@@ -7,16 +7,13 @@
 //
 
 import UIKit
-import SnapKit
 
 class RouteHeaderView: UIView {
-    
     @IBOutlet weak var pickUpIcon: UIImageView!
     @IBOutlet weak var pickUpTextField: UITextField!
     @IBOutlet weak var dropOffIcon: UIImageView!
     @IBOutlet weak var dropOffTextField: UITextField!
 
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -29,5 +26,4 @@ class RouteHeaderView: UIView {
         let view = UINib(nibName: "RouteHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! RouteHeaderView
         return view
     }
-    
 }

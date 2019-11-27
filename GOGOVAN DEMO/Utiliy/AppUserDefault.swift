@@ -24,16 +24,5 @@ struct AppUserDefaults {
     func getValue(forKey defaultName: String) -> Any? {
         return userDefaults.value(forKey: defaultName)
     }
-    
-//    func setValue<M>(_ value: Array<M> , forKey defaultName: String) {
-//        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) {
-//            userDefaults.set(data, forKey: defaultName)
-//        }
-//    }
-//
-//    func getListValue<M>(_ clazz: M.Type , forKey defaultName: String) -> M? {
-//        let decoded  = UserDefaults.standard.object(forKey: defaultName) as! Data
-//        return NSKeyedUnarchiver.unarchivedObject(ofClass: Array<clazz>, from: decoded)
-//    }
 }
 

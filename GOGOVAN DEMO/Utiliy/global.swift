@@ -26,7 +26,10 @@ struct publicConstant {
 }
 
 func isIphoneXSerial() -> Bool {
-    if UIScreen.main.nativeBounds.height == 2436 || UIScreen.main.nativeBounds.height == 2688 || UIScreen.main.nativeBounds.height == 1792  {
+    if (UIScreen.main.nativeBounds.height == 2436 ||
+        UIScreen.main.nativeBounds.height == 2688 ||
+        UIScreen.main.nativeBounds.height == 1792 )
+    {
         return true
     }
     return false

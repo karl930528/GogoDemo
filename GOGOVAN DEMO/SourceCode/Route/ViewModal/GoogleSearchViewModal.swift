@@ -10,9 +10,8 @@ import Foundation
 import RxSwift
 
 class GoogleSearchViewModal {
-    let searchResultList = PublishSubject<[GeometricResult]>()
-//      let pickupSearchResultList = PublishSubject<[GeometricResult]>()
-    let recentSearchResultList = PublishSubject<[GeometricResult]>()
+    let searchResultList = BehaviorSubject<[GeometricResult]>(value:[])
+    let recentSearchResultList = BehaviorSubject<[GeometricResult]>(value:[])
     let pickupSearchKeyword = PublishSubject<String>()
     let dropoffSearchKeyword = PublishSubject<String>()
     let disposeBag = DisposeBag()
@@ -20,8 +19,7 @@ class GoogleSearchViewModal {
     let historyRecondConstant = 5
     
     init() {
-        Observable
-            .of(pickupSearchKeyword,dropoffSearchKeyword)
+       Observable.of(pickupSearchKeyword,dropoffSearchKeyword)
             .merge()
             .subscribe(onNext: { (keyword) in
                 let request = MappableRequest<GoogleSearchResponse>(
@@ -37,11 +35,10 @@ class GoogleSearchViewModal {
                     }).disposed(by: self.disposeBag)
                 
             }).disposed(by: disposeBag)
-    
     }
     
-    func updatePickupRecentSearch(result:GeometricResult){
-        var tempList:[GeometricResult] = appUserDefaults.recentPickupSearch
+    func updateRecentSearch(result:GeometricResult , type:HistoryType){
+        var tempList:[GeometricResult] = type == .pickup ? appUserDefaults.recentPickupSearch : appUserDefaults.recentDropoffSearch
         if tempList.count > 0 && tempList.count < historyRecondConstant{
             tempList.insert(result, at: 0)
         }else if tempList.count >= historyRecondConstant{
@@ -50,22 +47,25 @@ class GoogleSearchViewModal {
         }else{
             tempList.append(result)
         }
-        appUserDefaults.recentPickupSearch = tempList
-        recentSearchResultList.onNext(appUserDefaults.recentPickupSearch)
+        switch type {
+        case .pickup:
+            appUserDefaults.recentPickupSearch = tempList
+            break
+        case .dropoff:
+            appUserDefaults.recentDropoffSearch = tempList
+            break
+            
+        }
+        recentSearchResultList.onNext(tempList)
     }
     
-    func updateDropoffRecentSearch(result:GeometricResult){
-        var tempList:[GeometricResult] = appUserDefaults.recentDropoffSearch
-        if tempList.count > 0 && tempList.count < historyRecondConstant{
-            tempList.insert(result, at: 0)
-        }else if tempList.count >= historyRecondConstant{
-            tempList.removeLast()
-            tempList.insert(result, at: 0)
-        }else{
-            tempList.append(result)
-        }
-        appUserDefaults.recentDropoffSearch = tempList
-        recentSearchResultList.onNext(appUserDefaults.recentDropoffSearch)
+    func replaceText(textField:UITextField, index:Int, type:ResultType) {
+        textField.endEditing(true)
+        textField.becomeFirstResponder()
+        textField.text = ""
+        let listSubject = type == .searchResult ? searchResultList : recentSearchResultList
+        guard let text = try? listSubject.value()[index].name else { return }
+        textField.insertText(text)
     }
     
 }
