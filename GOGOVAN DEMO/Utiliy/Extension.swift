@@ -71,7 +71,6 @@ extension AppUserDefaults {
     
     var recentPickupSearch: [GeometricResult] {
         get {
-//            return userDefaults.value(forKey: UserDefaultKey.recentPickupSearch) as? [geometricResult] ?? []
             let data = userDefaults.object(forKey: UserDefaultKey.recentPickupSearch) as? Data
             guard let d = data else { return [] }
             return NSKeyedUnarchiver.unarchiveObject(with: d) as! [GeometricResult]
@@ -85,7 +84,6 @@ extension AppUserDefaults {
     
     var recentDropoffSearch: [GeometricResult] {
         get {
-//            return userDefaults.value(forKey: UserDefaultKey.recentDropoffSearch) as? [geometricResult] ?? []
             let data = userDefaults.object(forKey: UserDefaultKey.recentDropoffSearch) as? Data
             guard let d = data else { return [] }
             return NSKeyedUnarchiver.unarchiveObject(with: d) as! [GeometricResult]

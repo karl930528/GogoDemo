@@ -48,7 +48,7 @@ class MapBaseViewController: AbstractViewController {
     }
     
     func setMapView() {
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: mapContainerHeight) // initial map view height
+        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: mapContainerHeight)
         mapContainer = UIView(frame: frame)
         self.view.addSubview(mapContainer)
         
