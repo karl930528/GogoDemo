@@ -12,7 +12,6 @@ import RxSwift
 import RxCocoa 
 
 class RouteViewController: UIViewController {
-    
     let historyIcon = #imageLiteral(resourceName: "history_icon")
     let headerHeight: CGFloat = 100
     let estimatedHeight: CGFloat = 44
@@ -113,20 +112,33 @@ class RouteViewController: UIViewController {
         
         pickupBeginEditObservable
             .subscribe(onNext: { (_) in
-                self.googleSearchViewModal.recentSearchResultList
-                    .onNext(appUserDefaults.recentPickupSearch)
-            }).disposed(by: googleSearchViewModal.disposeBag)
-        
-        pickupBeginEditObservable
-            .subscribe(onNext: { (_) in
+                self.headerView.pickUpTextField.backgroundColor = UIColor(hexString: "#C6E0EC", alpha: 0.6)
                 self.googleSearchViewModal.recentSearchResultList
                     .onNext(appUserDefaults.recentPickupSearch)
             }).disposed(by: googleSearchViewModal.disposeBag)
         
         dropoffBeginEditObservable
             .subscribe(onNext: { (_) in
+                self.headerView.dropOffTextField.backgroundColor = UIColor(hexString: "#C6E0EC", alpha: 0.6)
                 self.googleSearchViewModal.recentSearchResultList
                     .onNext(appUserDefaults.recentDropoffSearch)
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
+        pickupEndEditObservable
+            .subscribe(onNext: { (_) in
+                self.headerView.pickUpTextField.backgroundColor = UIColor(hexString: "#ECECEC", alpha: 0.6)
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
+        dropoffEndEditObservable
+            .subscribe(onNext: { (_) in
+                self.headerView.dropOffTextField.backgroundColor = UIColor(hexString: "#ECECEC", alpha: 0.6)
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
+        Observable
+            .of(pickupBeginEditObservable,dropoffBeginEditObservable)
+            .merge()
+            .subscribe(onNext: {
+                self.googleSearchViewModal.textEdit.onNext(true)
             }).disposed(by: googleSearchViewModal.disposeBag)
         
         Observable
@@ -156,10 +168,10 @@ class RouteViewController: UIViewController {
             .disposed(by: googleSearchViewModal.disposeBag)
         
         dropoffTextFieldTextObservable
-        .map { (keyword) -> Bool in
-            return false}
-        .bind(to: historyTableView.rx.isHidden)
-        .disposed(by: googleSearchViewModal.disposeBag)
+            .map { (keyword) -> Bool in
+                return false}
+            .bind(to: historyTableView.rx.isHidden)
+            .disposed(by: googleSearchViewModal.disposeBag)
     }
     
     func setupTableHeader() {
@@ -178,7 +190,22 @@ class RouteViewController: UIViewController {
             .bind(to: googleSearchViewModal.dropoffSearchKeyword)
             .disposed(by: googleSearchViewModal.disposeBag)
     }
+}
+
+extension RouteViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let border = UIView(frame: CGRect(x:0, y: headerHeight - 1 , width:self.view.bounds.width, height:1))
+        border.backgroundColor = .lightGray
+        headerView.addSubview(border)
+        return headerView
+    }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return headerHeight
+    }
+}
+
+extension RouteViewController {
     func setupTableCell(result:GeometricResult, type:ResultType) -> UITableViewCell {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.subtitle, reuseIdentifier: nil)
         cell.textLabel?.text = result.name
@@ -193,18 +220,5 @@ class RouteViewController: UIViewController {
             break
         }
         return cell
-    }
-}
-
-extension RouteViewController: UITableViewDelegate{
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let border = UIView(frame: CGRect(x:0, y: headerHeight - 1 , width:self.view.bounds.width, height:1))
-        border.backgroundColor = .lightGray
-        headerView.addSubview(border)
-        return headerView
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight
     }
 }

@@ -11,16 +11,12 @@ import GoogleMaps
 import SnapKit
 import RxSwift
 
-struct PickDropLocation {
-    var pickupLocation: Location?
-    var dropoffLocation: Location?
-}
-
 class MapViewController: AbstractViewController { 
-    
-    let zoomScale: Float = 18.0
+    let zoomScale: Float = 17.0
+    let strokeWidth: CGFloat = 8.0
     let pickupIcon = #imageLiteral(resourceName: "pickup_icon")
     let dropoffIcon = #imageLiteral(resourceName: "dropoff_icon")
+    let dotIcon = #imageLiteral(resourceName: "dot_icon")
     
     var vMap: GMSMapView!
     var currentLocation: CLLocation?
@@ -35,11 +31,6 @@ class MapViewController: AbstractViewController {
     func setupMapView() {
         locationPermission()
         setupGoogleMap()
-    }
-    
-    func locationPermission(){
-        locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
     }
     
     func setupGoogleMap() {
@@ -66,46 +57,87 @@ class MapViewController: AbstractViewController {
         googleSearchViewModal.pickupLocation
             .skip(1)
             .subscribe(onNext: { (location) in
-                guard let lat:Double = location.lat, let lng:Double = location.lng else { return }
+                guard let _:Double = location.lat, let _:Double = location.lng else {
+                    self.markerLocation.pickupLocation = nil
+                    self.setupMaker()
+                    return
+                }
+                if (!self.isLocationFree(location: location, type:.pickupPoint)) { return }
                 self.markerLocation.pickupLocation = location
-                self.setupMaker(lat: lat, lng: lng, type: .pickupPoint)
+                self.setupMaker()
             }).disposed(by: googleSearchViewModal.disposeBag)
         
         googleSearchViewModal.dropoffLocation
             .skip(1)
             .subscribe(onNext: { (location) in
-                guard let lat = location.lat, let lng = location.lng else { return }
-                self.setupMaker(lat: lat, lng: lng, type: .dropoffPoint)
+                guard let _ = location.lat, let _ = location.lng else {
+                    self.markerLocation.dropoffLocation = nil
+                    self.setupMaker()
+                    return
+                }
+                if (!self.isLocationFree(location: location, type:.dropoffPoint)) { return }
+                self.markerLocation.dropoffLocation = location
+                self.setupMaker()
+            }).disposed(by: googleSearchViewModal.disposeBag)
+        
+        googleSearchViewModal.directionPath
+            .subscribe(onNext: { (pathString) in
+                self.drawPath(from: pathString)
             }).disposed(by: googleSearchViewModal.disposeBag)
     }
     
-    func setupMaker(lat:Double, lng:Double, type: MarkerType) {
-//        let location = Location(lat: lat, lng: lng)
-//        if !isLocationFree(location: location){
-//            return
-//        }
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: lat, longitude: lng))
-        marker.map = vMap
-//        marker.userData = Location
-//        allMarkerLocation.append(location)
-        
-        switch type {
-        case .pickupPoint:
-            marker.icon = pickupIcon.resized(to: CGSize(width: 20, height: 20))
-            break
-        case .dropoffPoint:
-            marker.icon = dropoffIcon.resized(to: CGSize(width: 20, height: 20))
-            break
+    func setupMaker() {
+        vMap.clear()
+        if markerLocation.pickupLocation != nil{
+            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: markerLocation.pickupLocation?.lat ?? 0,
+                                                                    longitude: markerLocation.pickupLocation?.lng ?? 0))
+            marker.map = vMap
+//            marker.icon = pickupIcon.resized(to: CGSize(width: 30, height: 30))
+        }
+        if markerLocation.dropoffLocation != nil{
+            let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: markerLocation.dropoffLocation?.lat ?? 0,
+                                                                    longitude: markerLocation.dropoffLocation?.lng ?? 0))
+            marker.map = vMap
+//            marker.icon = dropoffIcon.resized(to: CGSize(width: 20, height: 20))
+        }
+        if (markerLocation.pickupLocation != nil) && (markerLocation.dropoffLocation != nil) {
+            googleSearchViewModal.routeLocation.onNext(markerLocation)
+            googleSearchViewModal.textEdit.onNext(false)
         }
     }
+}
+
+extension MapViewController {
+    func locationPermission(){
+        locationManager.delegate = self
+        locationManager.requestWhenInUseAuthorization()
+    }
     
-//    func isLocationFree(location: Location) -> Bool {
-//        var isFree: Bool = true
-//        for markerLocation in allMarkerLocation{
-//            isFree = markerLocation.lat != location.lat && markerLocation.lng != location.lng
-//        }
-//        return isFree
-//    }
+    func isLocationFree(location: Location, type:MarkerType) -> Bool {
+        guard let marker = type == .pickupPoint ? markerLocation.pickupLocation : markerLocation.dropoffLocation else {
+            if type == .pickupPoint{
+                markerLocation.pickupLocation = location
+            }else{
+                markerLocation.dropoffLocation = location
+            }
+            return true
+        }
+        return marker.lat != location.lat && marker.lng != location.lng
+    }
+    
+    func drawPath(from polyStr: String){
+        let paths = GMSPath(fromEncodedPath: polyStr)
+        let polyLine = GMSPolyline(path: paths)
+        polyLine.strokeWidth = strokeWidth
+        polyLine.strokeColor = .lightGray
+        let styles: [GMSStrokeStyle] = [GMSStrokeStyle.solidColor(UIColor(patternImage: dotIcon)), GMSStrokeStyle.solidColor(.gray)]
+        let scale = 1.0 / vMap.projection.points(forMeters: 1, at: vMap.camera.target)
+        let solidLine = NSNumber(value: Float(strokeWidth) * Float(scale))
+        let gap = NSNumber(value: Float(strokeWidth) * Float(scale))
+        let span = GMSStyleSpans(polyLine.path!, styles, [solidLine, gap], GMSLengthKind.rhumb)
+        polyLine.spans = span
+        polyLine.map = vMap
+    }
 }
 
 extension MapViewController : GMSMapViewDelegate {

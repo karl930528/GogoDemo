@@ -15,7 +15,10 @@ class GoogleSearchViewModal {
     let pickupSearchKeyword = PublishSubject<String>()
     let dropoffSearchKeyword = PublishSubject<String>()
     let pickupLocation = BehaviorSubject<Location>(value: Location())
-    let dropoffLocation = BehaviorSubject<Location>(value: Location()) 
+    let dropoffLocation = BehaviorSubject<Location>(value: Location())
+    let routeLocation = PublishSubject<PickDropLocation>()
+    let directionPath = PublishSubject<String>()
+    let textEdit = PublishSubject<Bool>()
     let disposeBag = DisposeBag()
     
     let historyRecondConstant = 5
@@ -40,6 +43,11 @@ class GoogleSearchViewModal {
                 }
                 self.googleSearchPlace(keyword: keyword)
             }).disposed(by: disposeBag)
+    
+        routeLocation
+            .subscribe(onNext: { (pickdropLocation) in
+                self.googleSearchDirection(pickdropLocation: pickdropLocation)
+            }).disposed(by: disposeBag)
     }
     
     func googleSearchPlace(keyword:String) {
@@ -55,6 +63,26 @@ class GoogleSearchViewModal {
             }).disposed(by: self.disposeBag)
     }
     
+    func googleSearchDirection(pickdropLocation:PickDropLocation){
+        guard let pickLat = pickdropLocation.pickupLocation?.lat, let pickLng = pickdropLocation.pickupLocation?.lng,
+              let dropLat = pickdropLocation.dropoffLocation?.lat, let dropLng = pickdropLocation.dropoffLocation?.lng else {
+           return
+        }
+        let request = MappableRequest<GoogleDirectionResponse>(
+            method: .get, releativeURL:"\(urlPath.googleDirectionPath)?origin=\(pickLat),\(pickLng)&destination=\(dropLat),\(dropLng)&sensor=false&mode=driving&key=\(publicConstant.googleAPIKey)",
+            param: nil)
+        WebServices
+            .requestJSONByModel(request: request)
+            .subscribe(onNext: { (response) in
+                if let routes = response.routes{
+                    self.directionPath.onNext(routes.first?.overview_polyline?.points ?? "")
+                }
+            }).disposed(by: self.disposeBag)
+
+    }
+}
+
+extension GoogleSearchViewModal{
     func handleTap(textField:UITextField, result:GeometricResult, index:Int, historyType:HistoryType, resultType:ResultType){
         replaceText(textField: textField,
                     index: updateRecentSearch(result: result, type: historyType, index: index),
@@ -66,7 +94,7 @@ class GoogleSearchViewModal {
     func updateRecentSearch(result:GeometricResult, type:HistoryType, index:Int) -> Int{
         var resultIndex:Int = index
         var tempList:[GeometricResult] = type == .pickup ? appUserDefaults.recentPickupSearch : appUserDefaults.recentDropoffSearch
-
+        
         for i in 0..<tempList.count{
             if tempList[i].formatted_address == result.formatted_address {
                 tempList.remove(at: i)
@@ -103,6 +131,4 @@ class GoogleSearchViewModal {
         guard let text = try? listSubject.value()[index].name else { return }
         textField.insertText(text)
     }
-    
-
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		0C26FD894E6324CE189D2389 /* Pods_GOGOVAN_DEMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52933D2F0F665C834B4483D /* Pods_GOGOVAN_DEMO.framework */; };
 		5273FAA3238ED6370088C1FC /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA2238ED6370088C1FC /* EnumType.swift */; };
+		5273FAA5239025770088C1FC /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA4239025770088C1FC /* LocationModel.swift */; };
+		5273FAA72390259C0088C1FC /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */; };
 		529C3990238821030013C3E0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C398F238821030013C3E0 /* MapViewController.swift */; };
 		529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C3993238829F40013C3E0 /* AbstractViewController.swift */; };
 		529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39972389775C0013C3E0 /* MapBaseViewController.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		5273FAA2238ED6370088C1FC /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
+		5273FAA4239025770088C1FC /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		528EF3C688AC85EBFB3ADF84 /* Pods-GOGOVAN DEMO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOGOVAN DEMO.release.xcconfig"; path = "Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO.release.xcconfig"; sourceTree = "<group>"; };
 		529C398F238821030013C3E0 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		529C3993238829F40013C3E0 /* AbstractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
@@ -143,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				F80713EE238BBF4600AFBAD9 /* GoogleSearchResponse.swift */,
+				5273FAA4239025770088C1FC /* LocationModel.swift */,
+				5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -390,6 +396,7 @@
 				52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */,
 				529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */,
 				529C39A7238A47020013C3E0 /* Global.swift in Sources */,
+				5273FAA72390259C0088C1FC /* GoogleDirectionResponse.swift in Sources */,
 				F80713F3238BD7D000AFBAD9 /* GoogleSearchViewModal.swift in Sources */,
 				529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */,
 				529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */,
@@ -398,6 +405,7 @@
 				529C399D238980570013C3E0 /* RouteViewController.swift in Sources */,
 				529C3990238821030013C3E0 /* MapViewController.swift in Sources */,
 				529C39AA238A81460013C3E0 /* WebServices.swift in Sources */,
+				5273FAA5239025770088C1FC /* LocationModel.swift in Sources */,
 				529C39A2238997C00013C3E0 /* RouteHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

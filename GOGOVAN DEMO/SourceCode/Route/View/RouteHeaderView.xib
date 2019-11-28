@@ -45,7 +45,7 @@
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select pick-up point" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="FE6-aq-lZh">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
-                                            <color key="backgroundColor" red="0.92628724093264247" green="0.92628724093264247" blue="0.92628724093264247" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>
@@ -92,7 +92,7 @@
                                     <subviews>
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Select drop-off point" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="NGw-i1-MlJ">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
-                                            <color key="backgroundColor" red="0.92628724090000003" green="0.92628724090000003" blue="0.92628724090000003" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.92549019607843142" green="0.92549019607843142" blue="0.92549019607843142" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="displayP3"/>
                                             <nil key="textColor"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                             <textInputTraits key="textInputTraits"/>

@@ -27,6 +27,7 @@ struct publicConstant {
 
 struct urlPath {
     static let googleSearchPath = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+    static let googleDirectionPath = "https://maps.googleapis.com/maps/api/directions/json"
 }
 
 func isIphoneXSerial() -> Bool {
