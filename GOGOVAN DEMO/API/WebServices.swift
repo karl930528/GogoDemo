@@ -20,13 +20,25 @@ public struct MappableRequest<Model: Codable> {
     var header: [String: String]?
     var requestOptions: RequestOption = []
     
-    init(method: HTTPMethod = .get, releativeURL: String, param: [String:Any], encoding: ParameterEncoding = JSONEncoding.default, header: [String:String]? = nil) {
-        let urlString = "https://itunes.apple.com".appending(releativeURL).addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+    init(method: HTTPMethod = .get,
+         releativeURL: String,
+         param: [String:Any]? = nil,
+         encoding: ParameterEncoding = JSONEncoding.default,
+         header: [String:String]? = nil) {
+        let urlString = releativeURL.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
         let url = URL(string: urlString ?? "")!
-        self.init(method: method, absoluteURL: url, param: param, encoding: encoding, header: header)
+        self.init(method: method,
+                  absoluteURL: url,
+                  param: param,
+                  encoding: encoding,
+                  header: header)
     }
     
-    init(method: HTTPMethod, absoluteURL: URL, param: [String:Any], encoding: ParameterEncoding, header: [String:String]? = nil) {
+    init(method: HTTPMethod,
+         absoluteURL: URL,
+         param: [String:Any]? = nil,
+         encoding: ParameterEncoding,
+         header: [String:String]? = nil) {
         self.method = method
         self.url = absoluteURL
         self.param = param
@@ -40,7 +52,6 @@ struct RequestOption: OptionSet {
     
     static let noLoadingIndicator = RequestOption(rawValue: 1)
     static let noDefaultErrorAlert = RequestOption(rawValue: 2)
-    
 }
 
 class WebServices {
@@ -60,7 +71,11 @@ class WebServices {
         //        var header: [String: String]?
         var requestObservable: Observable<M> = Observable
             .deferred { () -> Observable<(HTTPURLResponse, [String:Any])> in
-                return WebServices.requestJSON(request.method, request.url, parameters: request.param, encoding: request.encoding, headers: nil)
+                return WebServices.requestJSON(request.method,
+                                               request.url,
+                                               parameters: request.param,
+                                               encoding: request.encoding,
+                                               headers: nil)
             }
             .map(WebServices.mapResponseToModel)
         
@@ -93,7 +108,10 @@ class WebServices {
                             headers: [String: String]? = nil) -> Observable<(HTTPURLResponse, [String:Any])> {
         
         let request = WebServices.afSessionManager.rx
-            .request(method, url, parameters: parameters, encoding: encoding, headers: headers)
+            .request(method, url,
+                     parameters: parameters,
+                     encoding: encoding,
+                     headers: headers)
             .responseJSON()
         
         let response = WebServices.responseJSON(dataResponse: request, url: url)

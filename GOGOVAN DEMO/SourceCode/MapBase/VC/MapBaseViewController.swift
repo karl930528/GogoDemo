@@ -10,11 +10,15 @@ import UIKit
 import SnapKit
 
 class MapBaseViewController: AbstractViewController {
-    
     var mapContent: MapViewController!
-    var mapContainer: UIView!
     var routeContent: RouteViewController!
+    var mapContainer: UIView!
     var routeContainer: UIView!
+    let menuIcon = #imageLiteral(resourceName: "menu_btn")
+    let backIcon = #imageLiteral(resourceName: "back_btn")
+    
+    var menu_btn: UIBarButtonItem!
+    var back_btn: UIBarButtonItem!
     
     lazy var mapContainerHeight: CGFloat = {
         return self.view.frame.height - (isIphoneXSerial() ? 78 + 44 : 44 ) - 100
@@ -22,24 +26,25 @@ class MapBaseViewController: AbstractViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavigationBar(title: "test")
-        self.setupNavBarBtn()
-        self.setupUI()
+        setupNavigationBar(title: "Gogovan")
+        setupNavBarBtn()
+        setupUI()
     }
     
     func setupNavBarBtn() {
-        let menu_btn = UIBarButtonItem(image: UIImage(named: "menu_btn"), style: .plain, target: self, action: #selector(ggg))
+        menu_btn = UIBarButtonItem(image: menuIcon,
+                                       style: .plain,
+                                       target: self,
+                                       action: nil)
+        
+        back_btn = UIBarButtonItem(image: backIcon,
+                                   style: .plain,
+                                   target: self,
+                                   action: #selector(clickBack))
+        
         menu_btn.tintColor = .black
+        back_btn.tintColor = .black
         self.navigationItem.leftBarButtonItem  = menu_btn
-    }
-    
-    @objc func ggg() {
-        var frame = self.mapContainer.frame
-        frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: 0)
-        UIView.animate(withDuration: 0.3) {
-            self.mapContainer.frame = frame
-            self.view.layoutIfNeeded()
-        }
     }
     
     func setupUI() {
@@ -48,7 +53,10 @@ class MapBaseViewController: AbstractViewController {
     }
     
     func setMapView() {
-        let frame = CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: mapContainerHeight) // initial map view height
+        let frame = CGRect(x: 0,
+                           y: 0,
+                           width: self.view.frame.size.width,
+                           height: mapContainerHeight)
         mapContainer = UIView(frame: frame)
         self.view.addSubview(mapContainer)
         
@@ -56,10 +64,7 @@ class MapBaseViewController: AbstractViewController {
         mapContainer.addSubview(mapContent.view)
         mapContent.didMove(toParent: self)
         mapContent.view.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(mapContainer)
-            make.bottom.equalTo(mapContainer)
-            make.left.equalTo(mapContainer)
-            make.right.equalTo(mapContainer)
+            make.top.bottom.left.right.equalTo(mapContainer)
         }
     }
     
@@ -78,11 +83,37 @@ class MapBaseViewController: AbstractViewController {
         routeContainer.addSubview(routeContent.view)
         routeContent.didMove(toParent: self)
         routeContent.view.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(routeContainer)
-            make.bottom.equalTo(routeContainer)
-            make.left.equalTo(routeContainer)
-            make.right.equalTo(routeContainer)
+            make.top.bottom.left.right.equalTo(routeContainer)
         }
+        mapContent.googleSearchViewModal = routeContent.googleSearchViewModal
+        mapContent.setupMapView()
+        
+        routeContent.googleSearchViewModal.textEdit
+            .subscribe(onNext: { (isEdit) in
+                self.slide(isEdit: isEdit)
+            }).disposed(by: routeContent.googleSearchViewModal.disposeBag)
     }
     
+}
+
+extension MapBaseViewController {
+    @objc func clickBack() {
+        routeContent.googleSearchViewModal.textEdit.onNext(false)
+    }
+    
+    func slide(isEdit:Bool) {
+        var frame = self.mapContainer.frame
+        frame = CGRect(x: frame.minX,
+                       y: frame.minY,
+                       width: frame.width,
+                       height: isEdit ? 0 : mapContainerHeight)
+        UIView.animate(withDuration: 0.3) {
+            self.mapContainer.frame = frame
+            self.navigationItem.leftBarButtonItem = isEdit ? self.back_btn : self.menu_btn
+            self.view.layoutIfNeeded()
+            if !isEdit{
+                self.view.endEditing(true)
+            }
+        }
+    }
 }

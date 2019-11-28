@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0C26FD894E6324CE189D2389 /* Pods_GOGOVAN_DEMO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A52933D2F0F665C834B4483D /* Pods_GOGOVAN_DEMO.framework */; };
+		5273FAA3238ED6370088C1FC /* EnumType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA2238ED6370088C1FC /* EnumType.swift */; };
+		5273FAA5239025770088C1FC /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA4239025770088C1FC /* LocationModel.swift */; };
+		5273FAA72390259C0088C1FC /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */; };
 		529C3990238821030013C3E0 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C398F238821030013C3E0 /* MapViewController.swift */; };
 		529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C3993238829F40013C3E0 /* AbstractViewController.swift */; };
 		529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39972389775C0013C3E0 /* MapBaseViewController.swift */; };
@@ -18,6 +21,7 @@
 		529C39AA238A81460013C3E0 /* WebServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39A9238A81460013C3E0 /* WebServices.swift */; };
 		529C39AC238A82D70013C3E0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AB238A82D70013C3E0 /* Extension.swift */; };
 		529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AD238A83570013C3E0 /* LoadingIndicator.swift */; };
+		529C39B0238C39560013C3E0 /* AppUserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = 529C39AF238C39560013C3E0 /* AppUserDefault.swift */; };
 		52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52B2B38E23881ACF0053D3AD /* AppDelegate.swift */; };
 		52B2B39623881AD00053D3AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39523881AD00053D3AD /* Assets.xcassets */; };
 		52B2B39923881AD00053D3AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 52B2B39723881AD00053D3AD /* LaunchScreen.storyboard */; };
@@ -26,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5273FAA2238ED6370088C1FC /* EnumType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumType.swift; sourceTree = "<group>"; };
+		5273FAA4239025770088C1FC /* LocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
+		5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		528EF3C688AC85EBFB3ADF84 /* Pods-GOGOVAN DEMO.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GOGOVAN DEMO.release.xcconfig"; path = "Target Support Files/Pods-GOGOVAN DEMO/Pods-GOGOVAN DEMO.release.xcconfig"; sourceTree = "<group>"; };
 		529C398F238821030013C3E0 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		529C3993238829F40013C3E0 /* AbstractViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +44,7 @@
 		529C39A9238A81460013C3E0 /* WebServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServices.swift; sourceTree = "<group>"; };
 		529C39AB238A82D70013C3E0 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		529C39AD238A83570013C3E0 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		529C39AF238C39560013C3E0 /* AppUserDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserDefault.swift; sourceTree = "<group>"; };
 		52B2B38B23881ACF0053D3AD /* GOGOVAN DEMO.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "GOGOVAN DEMO.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		52B2B38E23881ACF0053D3AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		52B2B39523881AD00053D3AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -81,7 +89,6 @@
 			isa = PBXGroup;
 			children = (
 				529C398623881EE20013C3E0 /* VC */,
-				529C398823881F150013C3E0 /* Modal */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -92,7 +99,6 @@
 				F80713F1238BD74A00AFBAD9 /* ViewModal */,
 				F80713F0238BD44E00AFBAD9 /* View */,
 				529C399B2389804A0013C3E0 /* VC */,
-				529C39A02389959B0013C3E0 /* Modal */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -103,13 +109,6 @@
 				529C398F238821030013C3E0 /* MapViewController.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		529C398823881F150013C3E0 /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modal;
 			sourceTree = "<group>";
 		};
 		529C398C23881FED0013C3E0 /* Common */ = {
@@ -148,6 +147,8 @@
 			isa = PBXGroup;
 			children = (
 				F80713EE238BBF4600AFBAD9 /* GoogleSearchResponse.swift */,
+				5273FAA4239025770088C1FC /* LocationModel.swift */,
+				5273FAA62390259C0088C1FC /* GoogleDirectionResponse.swift */,
 			);
 			path = Modal;
 			sourceTree = "<group>";
@@ -158,6 +159,8 @@
 				529C39A6238A47020013C3E0 /* Global.swift */,
 				529C39AB238A82D70013C3E0 /* Extension.swift */,
 				529C39AD238A83570013C3E0 /* LoadingIndicator.swift */,
+				529C39AF238C39560013C3E0 /* AppUserDefault.swift */,
+				5273FAA2238ED6370088C1FC /* EnumType.swift */,
 			);
 			path = Utiliy;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 				529C398323881E190013C3E0 /* Image */,
 				52B2B3A223881C810053D3AD /* Storyboard */,
 				52B2B3A123881C730053D3AD /* Settinng */,
+				529C39A02389959B0013C3E0 /* Modal */,
 				52B2B3A023881B630053D3AD /* SourceCode */,
 				52B2B39A23881AD00053D3AD /* Info.plist */,
 			);
@@ -392,12 +396,16 @@
 				52B2B38F23881ACF0053D3AD /* AppDelegate.swift in Sources */,
 				529C39AE238A83570013C3E0 /* LoadingIndicator.swift in Sources */,
 				529C39A7238A47020013C3E0 /* Global.swift in Sources */,
+				5273FAA72390259C0088C1FC /* GoogleDirectionResponse.swift in Sources */,
 				F80713F3238BD7D000AFBAD9 /* GoogleSearchViewModal.swift in Sources */,
 				529C3994238829F40013C3E0 /* AbstractViewController.swift in Sources */,
 				529C39982389775C0013C3E0 /* MapBaseViewController.swift in Sources */,
+				5273FAA3238ED6370088C1FC /* EnumType.swift in Sources */,
+				529C39B0238C39560013C3E0 /* AppUserDefault.swift in Sources */,
 				529C399D238980570013C3E0 /* RouteViewController.swift in Sources */,
 				529C3990238821030013C3E0 /* MapViewController.swift in Sources */,
 				529C39AA238A81460013C3E0 /* WebServices.swift in Sources */,
+				5273FAA5239025770088C1FC /* LocationModel.swift in Sources */,
 				529C39A2238997C00013C3E0 /* RouteHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -539,13 +547,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B98SBCL5R4;
+				DEVELOPMENT_TEAM = L62U4A5HST;
 				INFOPLIST_FILE = "GOGOVAN DEMO/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -560,13 +568,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = B98SBCL5R4;
+				DEVELOPMENT_TEAM = L62U4A5HST;
 				INFOPLIST_FILE = "GOGOVAN DEMO/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.karl.GOGGOVAN-DEMO-APP1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
