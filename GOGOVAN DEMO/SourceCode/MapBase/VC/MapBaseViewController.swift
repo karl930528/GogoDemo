@@ -12,9 +12,13 @@ import SnapKit
 class MapBaseViewController: AbstractViewController {
     
     var mapContent: MapViewController!
-    var mapContainer: UIView!
     var routeContent: RouteViewController!
+    var mapContainer: UIView!
     var routeContainer: UIView!
+    let menuIcon = #imageLiteral(resourceName: "menu_btn")
+    let backIcon = #imageLiteral(resourceName: "menu_btn")
+    
+    var down :Bool = true
     
     lazy var mapContainerHeight: CGFloat = {
         return self.view.frame.height - (isIphoneXSerial() ? 78 + 44 : 44 ) - 100
@@ -22,13 +26,13 @@ class MapBaseViewController: AbstractViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupNavigationBar(title: "test")
-        self.setupNavBarBtn()
-        self.setupUI()
+        setupNavigationBar(title: "test")
+        setupNavBarBtn()
+        setupUI()
     }
     
     func setupNavBarBtn() {
-        let menu_btn = UIBarButtonItem(image: UIImage(named: "menu_btn"),
+        let menu_btn = UIBarButtonItem(image: menuIcon,
                                        style: .plain,
                                        target: self,
                                        action: #selector(ggg))
@@ -37,14 +41,27 @@ class MapBaseViewController: AbstractViewController {
     }
     
     @objc func ggg() {
-        var frame = self.mapContainer.frame
-        frame = CGRect(x: frame.minX,
-                       y: frame.minY,
-                       width: frame.width,
-                       height: 0)
-        UIView.animate(withDuration: 0.3) {
-            self.mapContainer.frame = frame
-            self.view.layoutIfNeeded()
+        down = !down
+        if (down){
+            var frame = self.mapContainer.frame
+            frame = CGRect(x: frame.minX,
+                           y: frame.minY,
+                           width: frame.width,
+                           height: mapContainerHeight)
+            UIView.animate(withDuration: 0.3) {
+                self.mapContainer.frame = frame
+                self.view.layoutIfNeeded()
+            }
+        }else{
+            var frame = self.mapContainer.frame
+            frame = CGRect(x: frame.minX,
+                           y: frame.minY,
+                           width: frame.width,
+                           height: 0)
+            UIView.animate(withDuration: 0.3) {
+                self.mapContainer.frame = frame
+                self.view.layoutIfNeeded()
+            }
         }
     }
     
@@ -65,10 +82,7 @@ class MapBaseViewController: AbstractViewController {
         mapContainer.addSubview(mapContent.view)
         mapContent.didMove(toParent: self)
         mapContent.view.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(mapContainer)
-            make.bottom.equalTo(mapContainer)
-            make.left.equalTo(mapContainer)
-            make.right.equalTo(mapContainer)
+            make.top.bottom.left.right.equalTo(mapContainer)
         }
     }
     
@@ -87,11 +101,10 @@ class MapBaseViewController: AbstractViewController {
         routeContainer.addSubview(routeContent.view)
         routeContent.didMove(toParent: self)
         routeContent.view.snp.makeConstraints { (make) -> Void in
-            make.top.equalTo(routeContainer)
-            make.bottom.equalTo(routeContainer)
-            make.left.equalTo(routeContainer)
-            make.right.equalTo(routeContainer)
+            make.top.bottom.left.right.equalTo(routeContainer)
         }
+        mapContent.googleSearchViewModal = routeContent.googleSearchViewModal
+        mapContent.setupMapView()
     }
     
 }

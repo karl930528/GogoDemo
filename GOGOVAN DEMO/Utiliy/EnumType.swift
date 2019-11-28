@@ -17,3 +17,8 @@ enum ResultType {
     case searchResult
     case historyResults
 }
+
+enum MarkerType {
+    case pickupPoint
+    case dropoffPoint
+}

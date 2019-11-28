@@ -23,7 +23,6 @@ class RouteHeaderView: UIView {
     }
     
     class func getRouteHeader() -> RouteHeaderView {
-        let view = UINib(nibName: "RouteHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! RouteHeaderView
-        return view
+        return UINib(nibName: "RouteHeaderView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! RouteHeaderView
     }
 }

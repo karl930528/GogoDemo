@@ -9,15 +9,12 @@
 import UIKit
 
 class AbstractViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-
 }
 
 extension AbstractViewController {
-    
     func setupNavigationBar(title: String) {
         self.navigationItem.title = title
         self.navigationController?.navigationBar.backgroundColor = .white

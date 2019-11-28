@@ -85,7 +85,6 @@
 			isa = PBXGroup;
 			children = (
 				529C398623881EE20013C3E0 /* VC */,
-				529C398823881F150013C3E0 /* Modal */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -96,7 +95,6 @@
 				F80713F1238BD74A00AFBAD9 /* ViewModal */,
 				F80713F0238BD44E00AFBAD9 /* View */,
 				529C399B2389804A0013C3E0 /* VC */,
-				529C39A02389959B0013C3E0 /* Modal */,
 			);
 			path = Route;
 			sourceTree = "<group>";
@@ -107,13 +105,6 @@
 				529C398F238821030013C3E0 /* MapViewController.swift */,
 			);
 			path = VC;
-			sourceTree = "<group>";
-		};
-		529C398823881F150013C3E0 /* Modal */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Modal;
 			sourceTree = "<group>";
 		};
 		529C398C23881FED0013C3E0 /* Common */ = {
@@ -203,6 +194,7 @@
 				529C398323881E190013C3E0 /* Image */,
 				52B2B3A223881C810053D3AD /* Storyboard */,
 				52B2B3A123881C730053D3AD /* Settinng */,
+				529C39A02389959B0013C3E0 /* Modal */,
 				52B2B3A023881B630053D3AD /* SourceCode */,
 				52B2B39A23881AD00053D3AD /* Info.plist */,
 			);

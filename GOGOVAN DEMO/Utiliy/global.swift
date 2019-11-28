@@ -25,6 +25,10 @@ struct publicConstant {
     static let KSouthwest = "KSouthwest"
 }
 
+struct urlPath {
+    static let googleSearchPath = "https://maps.googleapis.com/maps/api/place/textsearch/json"
+}
+
 func isIphoneXSerial() -> Bool {
     if (UIScreen.main.nativeBounds.height == 2436 ||
         UIScreen.main.nativeBounds.height == 2688 ||
@@ -34,3 +38,27 @@ func isIphoneXSerial() -> Bool {
     }
     return false
 }
+
+//func handleOptional<M>(optionalObject: M?) -> M {
+//
+//    guard let nonOptionalObject = optionalObject else { return ValueContainer(value: M) }
+//    return nonOptionalObject
+//}
+//
+//protocol ValueType {
+//    init?(raw: AnyObject)
+//}
+//
+//struct ValueContainer<T: ValueType> {
+//    var value: T
+//
+//    init(value: T) {
+//        self.value = value
+//    }
+//
+//    init?(raw: AnyObject) {
+//        guard let value = T(raw: raw) else { return nil }
+//        self.init(value: value)
+//    }
+//}
+//

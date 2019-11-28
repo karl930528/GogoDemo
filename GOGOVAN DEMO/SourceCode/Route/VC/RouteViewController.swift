@@ -13,13 +13,14 @@ import RxCocoa
 
 class RouteViewController: UIViewController {
     
+    let historyIcon = #imageLiteral(resourceName: "history_icon")
     let headerHeight: CGFloat = 100
     let estimatedHeight: CGFloat = 44
+    let googleSearchViewModal = GoogleSearchViewModal()
     
     var headerView: RouteHeaderView!
     var resultTableView: UITableView!
     var historyTableView: UITableView!
-    var googleSearchViewModal = GoogleSearchViewModal()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,16 +46,18 @@ class RouteViewController: UIViewController {
             .subscribe(onNext: { (index) in
                 if self.headerView.pickUpTextField.isEditing{
                     guard let result = try? self.googleSearchViewModal.searchResultList.value()[index.row] else { return }
-                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .pickup)
-                    self.googleSearchViewModal.replaceText(textField: self.headerView.pickUpTextField,
-                                                           index: index.row,
-                                                           type: .searchResult)
+                    self.googleSearchViewModal.handleTap(textField: self.headerView.pickUpTextField,
+                                                         result: result,
+                                                         index: index.row,
+                                                         historyType: .pickup,
+                                                         resultType: .searchResult)
                 }else{
                     guard let result = try? self.googleSearchViewModal.searchResultList.value()[index.row] else { return }
-                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .dropoff)
-                    self.googleSearchViewModal.replaceText(textField: self.headerView.dropOffTextField,
-                                                           index: index.row,
-                                                           type: .searchResult)
+                    self.googleSearchViewModal.handleTap(textField: self.headerView.dropOffTextField,
+                                                         result: result,
+                                                         index: index.row,
+                                                         historyType: .dropoff,
+                                                         resultType: .searchResult)
                 }
             }).disposed(by: googleSearchViewModal.disposeBag)
         
@@ -64,7 +67,7 @@ class RouteViewController: UIViewController {
         }
         .disposed(by: googleSearchViewModal.disposeBag)
     }
-    
+  
     func setupHistoryTableView() {
         historyTableView = UITableView()
         historyTableView.tableFooterView = UIView()
@@ -87,16 +90,18 @@ class RouteViewController: UIViewController {
             .subscribe(onNext: { (index) in
                 if self.headerView.pickUpTextField.isEditing{
                     guard let result = try? self.googleSearchViewModal.recentSearchResultList.value()[index.row] else { return }
-                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .pickup)
-                    self.googleSearchViewModal.replaceText(textField: self.headerView.pickUpTextField,
-                                                           index: index.row,
-                                                           type: .historyResults)
+                    self.googleSearchViewModal.handleTap(textField: self.headerView.pickUpTextField,
+                                                         result: result,
+                                                         index: index.row,
+                                                         historyType: .pickup,
+                                                         resultType: .historyResults)
                 }else{
                     guard let result = try? self.googleSearchViewModal.recentSearchResultList.value()[index.row] else { return }
-                    self.googleSearchViewModal.updateRecentSearch(result: result, type: .dropoff)
-                    self.googleSearchViewModal.replaceText(textField: self.headerView.dropOffTextField,
-                                                           index: index.row,
-                                                           type: .historyResults)
+                    self.googleSearchViewModal.handleTap(textField: self.headerView.dropOffTextField,
+                                                         result: result,
+                                                         index: index.row,
+                                                         historyType: .dropoff,
+                                                         resultType: .historyResults)
                 }
             }).disposed(by: googleSearchViewModal.disposeBag)
         
@@ -158,8 +163,8 @@ class RouteViewController: UIViewController {
     }
     
     func setupTableHeader() {
-        let pickupTextFieldTextObservable = headerView.pickUpTextField.rx.text.orEmpty.changed.filter{$0.count != 0}
-        let dropoffTextFieldTextObservable = headerView.dropOffTextField.rx.text.orEmpty.changed.filter{$0.count != 0}
+        let pickupTextFieldTextObservable = headerView.pickUpTextField.rx.text.orEmpty.changed
+        let dropoffTextFieldTextObservable = headerView.dropOffTextField.rx.text.orEmpty.changed
         
         pickupTextFieldTextObservable
             .debounce(RxTimeInterval.seconds(1), scheduler: MainScheduler.instance)
@@ -182,7 +187,7 @@ class RouteViewController: UIViewController {
         cell.selectionStyle = .none
         switch type {
         case .historyResults:
-            cell.imageView?.image = UIImage(named: "history_icon")
+            cell.imageView?.image = historyIcon
             break
         default:
             break

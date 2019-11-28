@@ -14,31 +14,67 @@ class GoogleSearchViewModal {
     let recentSearchResultList = BehaviorSubject<[GeometricResult]>(value:[])
     let pickupSearchKeyword = PublishSubject<String>()
     let dropoffSearchKeyword = PublishSubject<String>()
+    let pickupLocation = BehaviorSubject<Location>(value: Location())
+    let dropoffLocation = BehaviorSubject<Location>(value: Location()) 
     let disposeBag = DisposeBag()
     
     let historyRecondConstant = 5
     
     init() {
-       Observable.of(pickupSearchKeyword,dropoffSearchKeyword)
-            .merge()
+       pickupSearchKeyword
             .subscribe(onNext: { (keyword) in
-                let request = MappableRequest<GoogleSearchResponse>(
-                    method: .get, releativeURL:"https://maps.googleapis.com/maps/api/place/textsearch/json?query=\(keyword)&key=\(publicConstant.googleAPIKey)",
-                    param: nil)
-                
-                WebServices
-                    .requestJSONByModel(request: request)
-                    .subscribe(onNext: { (response) in
-                        if let results = response.results{
-                            self.searchResultList.onNext(results)
-                        }
-                    }).disposed(by: self.disposeBag)
-                
+                if keyword.count == 0{
+                    self.searchResultList.onNext([])
+                    self.pickupLocation.onNext(Location())
+                    return
+                }
+                self.googleSearchPlace(keyword: keyword)
+            }).disposed(by: disposeBag)
+        
+        dropoffSearchKeyword
+            .subscribe(onNext: { (keyword) in
+                if keyword.count == 0{
+                    self.searchResultList.onNext([])
+                    self.dropoffLocation.onNext(Location())
+                    return
+                }
+                self.googleSearchPlace(keyword: keyword)
             }).disposed(by: disposeBag)
     }
     
-    func updateRecentSearch(result:GeometricResult , type:HistoryType){
+    func googleSearchPlace(keyword:String) {
+        let request = MappableRequest<GoogleSearchResponse>(
+            method: .get, releativeURL:"\(urlPath.googleSearchPath)?query=\(keyword)&key=\(publicConstant.googleAPIKey)",
+            param: nil)
+        WebServices
+            .requestJSONByModel(request: request)
+            .subscribe(onNext: { (response) in
+                if let results = response.results{
+                    self.searchResultList.onNext(results)
+                }
+            }).disposed(by: self.disposeBag)
+    }
+    
+    func handleTap(textField:UITextField, result:GeometricResult, index:Int, historyType:HistoryType, resultType:ResultType){
+        replaceText(textField: textField,
+                    index: updateRecentSearch(result: result, type: historyType, index: index),
+                    type: resultType)
+        historyType == .pickup ? pickupLocation.onNext(result.geometry?.location ?? Location()) :
+            dropoffLocation.onNext(result.geometry?.location ?? Location())
+    }
+    
+    func updateRecentSearch(result:GeometricResult, type:HistoryType, index:Int) -> Int{
+        var resultIndex:Int = index
         var tempList:[GeometricResult] = type == .pickup ? appUserDefaults.recentPickupSearch : appUserDefaults.recentDropoffSearch
+
+        for i in 0..<tempList.count{
+            if tempList[i].formatted_address == result.formatted_address {
+                tempList.remove(at: i)
+                resultIndex = 0
+                break
+            }
+        }
+        
         if tempList.count > 0 && tempList.count < historyRecondConstant{
             tempList.insert(result, at: 0)
         }else if tempList.count >= historyRecondConstant{
@@ -54,9 +90,9 @@ class GoogleSearchViewModal {
         case .dropoff:
             appUserDefaults.recentDropoffSearch = tempList
             break
-            
         }
         recentSearchResultList.onNext(tempList)
+        return resultIndex
     }
     
     func replaceText(textField:UITextField, index:Int, type:ResultType) {
@@ -68,4 +104,5 @@ class GoogleSearchViewModal {
         textField.insertText(text)
     }
     
+
 }

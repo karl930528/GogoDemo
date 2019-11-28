@@ -46,6 +46,15 @@ class Geometry: NSObject, Codable, NSCoding {
 }
 
 class Location: NSObject, Codable, NSCoding {
+    override init() {
+        
+    }
+    
+    init(lat:Double, lng:Double) {
+        self.lat = lat
+        self.lng = lng
+    }
+    
     func encode(with coder: NSCoder) {
         coder.encode(lat, forKey: publicConstant.kLat)
         coder.encode(lng, forKey: publicConstant.Klng)
