@@ -21,7 +21,7 @@ class MapBaseViewController: AbstractViewController {
     var back_btn: UIBarButtonItem!
     
     lazy var mapContainerHeight: CGFloat = {
-        return self.view.frame.height - (isIphoneXSerial() ? 78 + 44 : 44 ) - 100
+        return self.view.frame.height - (isIphoneXSerial() ? 78 + 44 : 64 ) - 100
     }()
     
     override func viewDidLoad() {
